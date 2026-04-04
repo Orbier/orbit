@@ -1,0 +1,7 @@
+# you dont know what trauma my repo went thru
+*.exe
+*.asm
+*.s
+
+# i dont use cmake here but eh whatever
+build/
