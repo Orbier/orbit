@@ -40,14 +40,21 @@ To use this,
 ## Options/features
 
 - `ninja` use it like this `--ninja`
-- **Specific compiler** - Yes you can, By default its clang 
-  Use ID or name 
-  ID- 1 `gcc`
-  ID- 2 `clang`
-  ID- 3 `clang-cl`
-  ID- 4 `msvc`
+- **Specific compiler** - Yes you can, By default its clang. Refer to Compiler Options for this one
   Use it like - `--compiler-id=<id>` OR `--use-compiler=<name>`
 - Unity - use this `--unity`
+
+## Compiler Options
+
+Compiler ID And their names are as follows - 
+
+- ID 1 - `gcc`
+- ID 2 - `clang` Default
+- ID 3 - `clang-cl`
+- ID 4 - `msvc`
+> Note - For some reason whenever i try to `--use-compiler=msvc` it just quits on me bro
+> you can but for MSVC its recommended (by me) that you use Compiler ID. 
+> Thank you
 
 ## Examples
 
