@@ -31,6 +31,7 @@ void printUsage(const char* programName) {
               << "                          By default set to `clang` because i love it\n"
               << "  --unity              Build with Unity (single file compilation)\n"
               << "  --help               Show this help message\n"
+              << "  --legal-notice       Shows License (Under GNU GPL v3.0) and other legal information\n"
               << "\n\n Please join my discord server! https://discord.gg/kx8km2V7kz";
     // its still niche were `std::cout`ing this way
 }
@@ -60,6 +61,16 @@ Options parseArgs(int argc, char* argv[]) {
         else if (arg == "--help" || arg == "-h") {
             printUsage("ORBIT");
             std::exit(0);
+        }
+        else if (arg == "--legal-notice") {
+            std::cout << "ORBIT Build System\n"
+                      << "Licensed under GNU GPL v3.0\n"
+                      << "Copyright (c) 2026 Cyphrixz\n" 
+                      << "This program comes with ABSOLUTELY NO WARRANTY; see LICENSE for details.\n"
+                      << "This is Free Software, and you are welcome to redistribute it under certain conditions"
+                      << std::endl; 
+            std::exit(0); // what is difference b/w this and return 0 btw? 
+
         }
         else if (arg.rfind("--compiler-id=", 0) == 0) {
             std::string val = arg.substr(14);
