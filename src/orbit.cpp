@@ -142,7 +142,8 @@ int configureProject(const Options& opts) {
                 cmd += " -DCMAKE_CXX_COMPILER=cl -DCMAKE_C_COMPILER=cl";
                 break; // and here is capitalist propaganda of wierdness
                 // and copilot, you cant defend this. Its weird, but useful in 
-                // Visual Studio. 
+                // Visual Studio.
+                // idek why it behaves wierdly outside of visual studio, but it does. 
         }
     }
 
