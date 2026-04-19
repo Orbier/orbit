@@ -66,6 +66,9 @@ Compiler ID And their names are as follows -
 ./ORBIT build --compiler-id=4 --unity
 ```
 
+# Legal Notice! 
+Licenses have been changed from MIT -> GNU GPL v3. Please refer to License Notices (LICENSE_NOTICE.md) for more info
+
 ---
 
  Please join my discord server! https://discord.gg/kx8km2V7kz
