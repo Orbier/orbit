@@ -19,27 +19,27 @@ jobs:
             compiler: gcc
             cxx: g++
             cc: gcc
-            exe: ./orbit
+            exe: ./ORBIT
           - os: macos-latest
             compiler: gcc
             cxx: g++
             cc: gcc
-            exe: ./orbit
+            exe: ./ORBIT
           - os: macos-latest
             compiler: clang
             cxx: clang++
             cc: clang
-            exe: ./orbit
+            exe: ./ORBIT
           - os: windows-latest
             compiler: gcc
             cxx: g++
             cc: gcc
-            exe: ./orbit.exe
+            exe: ./ORBIT.exe
           - os: windows-latest
             compiler: clang
             cxx: clang++
             cc: clang
-            exe: ./orbit.exe
+            exe: ./ORBIT.exe
 
     steps:
       - name: Checkout
@@ -58,12 +58,12 @@ jobs:
         run: clang++ --version
 
       - name: Compile
-        run: ${{ matrix.cxx }} -o ${{ matrix.exe }} orbit.cpp -std=c++23
+        run: ${{ matrix.cxx }} -o ${{ matrix.exe }} src/orbit.cpp -std=c++23
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: orbit-${{ matrix.os }}-${{ matrix.compiler }}
+          name: ORBIT-${{ matrix.os }}-${{ matrix.compiler }}
           path: ${{ matrix.exe }}
 
       - name: Test
