@@ -63,7 +63,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ORBIT-${{ matrix.os }}-${{ matrix.compiler }}
+          name: orbit-${{ matrix.os }}-${{ matrix.compiler }}-v1.1
           path: ${{ matrix.exe }}
 
       - name: Test
