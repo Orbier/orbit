@@ -1,3 +1,27 @@
+/*
+    Orbit - A simple CMake build system wrapper for C++ projects
+    Copyright (C) 2026 Cyphrixz
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+*/
+
+/*
+    Additional Information: PLEASE SEE LICENSE_NOTICE.md 
+    Type `orbit --legal-notice` for more legal information and license details.
+*/
+
 #include <cstdlib>
 #include <iostream>
 #include <optional>
@@ -13,8 +37,8 @@ enum class Compiler { Gcc = 1, Clang = 2, ClangCl = 3, Msvc = 4 };
 struct Options {
     Action action = Action::None;
     bool useNinja = false;
-    std::optional<Compiler> compiler = Compiler::Clang;
-    bool unity = false;
+    std::optional<Compiler> compiler = Compiler::Clang; // std::optional :wilted_rose: (i love clang, so its default)
+    bool unity = false; // Shoutout to TheFatRat
 };
 
 void printUsage(const char* programName) {
@@ -46,6 +70,8 @@ std::optional<Compiler> parseCompilerArg(const std::string& arg) {
     if (arg == "3") return Compiler::ClangCl;
     if (arg == "4") return Compiler::Msvc; // is gd cologne a furry? 
     return std::nullopt; // i still dont know what this does (nullptr better)
+
+    // this all niche
 }
 
 Options parseArgs(int argc, char* argv[]) {
@@ -105,16 +131,18 @@ int configureProject(const Options& opts) {
         switch (opts.compiler.value()) {
             case Compiler::Gcc:
                 cmd += " -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc";
-                break;
+                break; // i love gnu
             case Compiler::Clang:
                 cmd += " -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang";
-                break;
+                break; // clang is my gurlfwend
             case Compiler::ClangCl:
                 cmd += " -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_C_COMPILER=clang-cl";
-                break;
+                break; // no, not here copilot, sadly
             case Compiler::Msvc:
                 cmd += " -DCMAKE_CXX_COMPILER=cl -DCMAKE_C_COMPILER=cl";
-                break;
+                break; // and here is capitalist propaganda of wierdness
+                // and copilot, you cant defend this. Its weird, but useful in 
+                // Visual Studio. 
         }
     }
 
@@ -127,7 +155,7 @@ int configureProject(const Options& opts) {
 
 int buildProject() {
     std::string cmd = "cmake --build " + getBuildDir();
-    return runCommand(cmd);
+    return runCommand(cmd); // gawd
 }
 
 int removeBuildDir() {
@@ -141,7 +169,7 @@ int removeBuildDir() {
         }
         std::cout << "Build directory removed.\n";
     } else {
-        std::cout << "Build directory does not exist.\n";
+        std::cout << "Build directory does not exist! \n"; // son.....
     }
     return 0;
 }

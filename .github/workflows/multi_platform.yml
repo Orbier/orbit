@@ -19,27 +19,27 @@ jobs:
             compiler: gcc
             cxx: g++
             cc: gcc
-            exe: ./ORBIT
+            exe: ./orbit
           - os: macos-latest
             compiler: gcc
             cxx: g++
             cc: gcc
-            exe: ./ORBIT
+            exe: ./orbit
           - os: macos-latest
             compiler: clang
             cxx: clang++
             cc: clang
-            exe: ./ORBIT
+            exe: ./orbit
           - os: windows-latest
             compiler: gcc
             cxx: g++
             cc: gcc
-            exe: ./ORBIT.exe
+            exe: ./orbit.exe
           - os: windows-latest
             compiler: clang
             cxx: clang++
             cc: clang
-            exe: ./ORBIT.exe
+            exe: ./orbit.exe
 
     steps:
       - name: Checkout
