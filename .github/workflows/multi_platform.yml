@@ -43,7 +43,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # what
 
       - name: Install GCC (Linux)
         if: matrix.compiler == 'gcc' && matrix.os == 'ubuntu-latest'

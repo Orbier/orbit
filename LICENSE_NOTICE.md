@@ -20,7 +20,7 @@ See the LICENSE file for details.
 ## Disclaimer
 
 This software is provided "as is", without warranty of any kind, as described in the applicable license.
-Under no Circumstances will the author be liable for any **indirect** damage arising from the software
+Under no Circumstances will the author be liable for any damage arising from the software
 
 
 
