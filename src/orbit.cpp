@@ -39,6 +39,7 @@ struct Options {
     bool useNinja = false;
     std::optional<Compiler> compiler = Compiler::Clang; // std::optional :wilted_rose: (i love clang, so its default)
     bool unity = false; // Shoutout to TheFatRat
+    std::optional<std::string> extraArgs;
 };
 
 void printUsage(const char* programName) {
@@ -54,6 +55,7 @@ void printUsage(const char* programName) {
               << "  --use-compiler=<name> Set compiler by name (gcc, clang, clang-cl, msvc)\n"
               << "                          By default set to `clang` because i love it\n"
               << "  --unity              Build with Unity (single file compilation)\n"
+              << "  --extraArgs=<args>  Extra arguments to be added\n"
               << "  --help               Show this help message\n"
               << "  --legal-notice       Shows License (Under GNU GPL v3.0) and other legal information\n"
               << "\n\n Please join my discord server! https://discord.gg/kx8km2V7kz";
@@ -106,6 +108,10 @@ Options parseArgs(int argc, char* argv[]) {
             std::string val = arg.substr(15);
             opts.compiler = parseCompilerArg(val);
         }
+        else if (arg.rfind("--extraArgs=", 0) == 0) {
+            std::string val = arg.substr(12);
+            opts.extraArgs = val;
+        }
     }
     return opts;
     // i had to make this with th help of opencode 
@@ -123,8 +129,7 @@ int configureProject(const Options& opts) {
     std::string cmd = "cmake -S " + getSourceDir() + " -B " + getBuildDir();
 
     if (opts.useNinja) {
-        cmd += " -G Ninja"; // I LOVE NINJA (im from instagrem, so i meant software)
-                            // ninja, not insta ninja
+        cmd += " -G Ninja";
     }
 
     if (opts.compiler.has_value()) {
@@ -149,6 +154,10 @@ int configureProject(const Options& opts) {
 
     if (opts.unity) {
         cmd += " -DCMAKE_UNITY_BUILD=ON";
+    }
+
+    if (opts.extraArgs.has_value()) {
+        cmd += " " + *opts.extraArgs;
     }
 
     return runCommand(cmd);

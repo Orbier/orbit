@@ -19,31 +19,26 @@ jobs:
             compiler: gcc
             cxx: g++
             cc: gcc
-            exe: ./orbit
           - os: macos-latest
             compiler: gcc
-            cxx: g++
-            cc: gcc
-            exe: ./orbit
+            cxx: g++-14
+            cc: gcc-14
           - os: macos-latest
             compiler: clang
             cxx: clang++
             cc: clang
-            exe: ./orbit
           - os: windows-latest
             compiler: gcc
             cxx: g++
             cc: gcc
-            exe: ./orbit.exe
           - os: windows-latest
             compiler: clang
             cxx: clang++
             cc: clang
-            exe: ./orbit.exe
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4 # what
+        uses: actions/checkout@v4
 
       - name: Install GCC (Linux)
         if: matrix.compiler == 'gcc' && matrix.os == 'ubuntu-latest'
@@ -57,14 +52,30 @@ jobs:
         if: matrix.compiler == 'clang' && matrix.os == 'macos-latest'
         run: clang++ --version
 
-      - name: Compile
-        run: ${{ matrix.cxx }} -o ${{ matrix.exe }} src/orbit.cpp -std=c++23
+      - name: Configure CMake
+        shell: bash
+        run: |
+          GENERATOR=""
+          [[ "${{ matrix.os }}" == "windows-latest" ]] && GENERATOR="-G \"MinGW Makefiles\""
+          cmake -B build -S . $GENERATOR \
+            -DCMAKE_CXX_COMPILER=${{ matrix.cxx }} \
+            -DCMAKE_C_COMPILER=${{ matrix.cc }}
+
+      - name: Build
+        run: cmake --build build
+
+      - name: Determine binary path
+        shell: bash
+        run: |
+          BINARY="build/orbit"
+          [[ "${{ runner.os }}" == "Windows" ]] && BINARY="build/orbit.exe"
+          echo "BINARY=$BINARY" >> $GITHUB_ENV
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: orbit-${{ matrix.os }}-${{ matrix.compiler }}-v1.1
-          path: ${{ matrix.exe }}
+          path: ${{ env.BINARY }}
 
       - name: Test
-        run: ${{ matrix.exe }} --help
+        run: ${{ env.BINARY }} --help
